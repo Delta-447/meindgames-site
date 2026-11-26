@@ -1,6 +1,7 @@
-// Meind Games - the hero's landing: the mark slams down, sparks fly off it
-// like a car's on impact, and the tyre marks draw under it. Everything else
-// on the site stays still.
+// Meind Games: the hero's landing (the mark slams down, sparks fly off it and
+// the tyre marks draw under it; tap the M to see it again), gameplay video that
+// only plays on screen, the car-talk card, the road down the side of the page
+// with the Tensai Sprint as the scroll position, and five hidden coins.
 (function () {
   var root = document.documentElement;
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -19,7 +20,92 @@
     }, { threshold: 0.2 }).observe(v);
   });
 
-  if (!hero || reduced) { root.classList.remove("js"); return; }
+  // ---- car talk: real-world facts and quotes, one at a time, shuffled after the first
+  document.querySelectorAll("[data-tips]").forEach(function (card) {
+    var items = JSON.parse(card.querySelector("[data-talk]").textContent);
+    var body = card.querySelector("[data-tip]"), count = card.querySelector("[data-tip-count]");
+    var kind = card.querySelector("[data-tip-kind]");
+    var order = [0], i = 0;
+    var rest = items.map(function (_, k) { return k; }).slice(1);
+    while (rest.length) order.push(rest.splice(Math.floor(Math.random() * rest.length), 1)[0]);
+    card.querySelector("[data-tip-next]").addEventListener("click", function () {
+      i = (i + 1) % order.length;
+      body.innerHTML = items[order[i]];
+      var quote = items[order[i]].indexOf("<blockquote") === 0;
+      kind.textContent = quote ? "Quote" : "Fun fact";
+      card.classList.toggle("is-fact", !quote);
+      count.textContent = (i + 1) + " / " + items.length;
+      body.classList.remove("flip"); void body.offsetWidth; body.classList.add("flip");
+    });
+  });
+
+  // ---- the road down the side: the Tensai Sprint is the scroll position.
+  // It glides to where the page is rather than jumping there, turns to face
+  // the way you scroll, and leans a little when you scroll fast.
+  var meter = document.querySelector("[data-meter]");
+  if (meter) {
+    var car = meter.querySelector("img");
+    var shown = 0, road = 0, lean = 0, facing = 0, faceTo = 0, lastY = window.scrollY, mraf = 0;
+    function goal() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      return max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    }
+    function frame() {
+      mraf = 0;
+      var target = goal(), dy = window.scrollY - lastY;
+      lastY = window.scrollY;
+      if (dy > 1) faceTo = 0; else if (dy < -1) faceTo = 180;
+      var ease = reduced ? 1 : 0.075;                       // how quickly the car catches up
+      var before = shown;
+      shown += (target - shown) * ease;
+      var speed = shown - before;                           // its own speed, not the wheel's
+      lean += ((reduced ? 0 : Math.max(-9, Math.min(9, speed * 900))) - lean) * 0.12;
+      facing += (faceTo - facing) * (reduced ? 1 : 0.14);
+      road += speed * 2600;                                 // the road rolls at the car's pace
+      var travel = meter.clientHeight - car.offsetHeight - 16;
+      car.style.transform = "translate3d(-50%," + (8 + shown * travel).toFixed(1) + "px,0) rotate(" + (facing + lean).toFixed(1) + "deg)";
+      meter.style.setProperty("--road", (-road).toFixed(1) + "px");
+      var moving = Math.abs(target - shown) > 0.0004 || Math.abs(lean) > 0.05 || Math.abs(faceTo - facing) > 0.5;
+      if (moving) mraf = requestAnimationFrame(frame);
+    }
+    function kick() { if (!mraf) mraf = requestAnimationFrame(frame); }
+    window.addEventListener("scroll", kick, { passive: true });
+    window.addEventListener("resize", kick);
+    // grab the road (or the car) to drive the page yourself
+    var dragging = false;
+    function seek(e) {
+      var r = meter.getBoundingClientRect();
+      var p = Math.min(1, Math.max(0, (e.clientY - r.top - car.offsetHeight / 2) / (r.height - car.offsetHeight)));
+      window.scrollTo(0, p * (document.documentElement.scrollHeight - window.innerHeight));
+    }
+    meter.addEventListener("pointerdown", function (e) { dragging = true; meter.setPointerCapture(e.pointerId); seek(e); e.preventDefault(); });
+    meter.addEventListener("pointermove", function (e) { if (dragging) seek(e); });
+    ["pointerup", "pointercancel"].forEach(function (n) { meter.addEventListener(n, function () { dragging = false; }); });
+    window.addEventListener("hashchange", function () { setTimeout(kick, 30); });
+    shown = goal(); frame();
+  }
+
+  // ---- five coins hidden around the page
+  var coins = document.querySelectorAll("[data-coin]");
+  var counter = document.querySelector("[data-coin-count]");
+  if (coins.length && counter) {
+    var found = 0, total = coins.length, text = counter.querySelector("[data-coin-text]");
+    coins.forEach(function (c) {
+      c.addEventListener("click", function () {
+        if (c.classList.contains("got")) return;
+        c.classList.add("got");
+        found++;
+        counter.hidden = false;
+        text.textContent = found < total
+          ? found + " of " + total + " hidden coins found"
+          : "All " + total + " found! Only 1,099,995 more for the Taurion Evo.";
+        setTimeout(function () { c.style.visibility = "hidden"; }, 520);
+      });
+    });
+  }
+
+  // (with reduced motion the stylesheet already shows the hero at rest)
+  if (!hero || reduced) return;
   root.classList.add("play");
 
   // sparks on the slam
@@ -82,4 +168,12 @@
 
   // the slam lands 0.57 s in (see .play .hero-mark in site.css)
   setTimeout(burst, 570);
+
+  // tap the M and it slams down again
+  var slamBtn = hero.querySelector(".slam");
+  if (slamBtn) slamBtn.addEventListener("click", function () {
+    mark.classList.remove("reslam"); mark.style.animation = "none"; void mark.offsetWidth; mark.style.animation = "";
+    mark.classList.add("reslam");
+    setTimeout(burst, 420);
+  });
 })();
