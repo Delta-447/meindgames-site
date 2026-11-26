@@ -453,28 +453,45 @@ a.store:active { transform: scale(0.97); }
 .js::-webkit-scrollbar { width: 0; height: 0; }
 .meter { display: none; }
 .js .meter {
-  display: block; position: fixed; z-index: 40; top: 0; right: 0; bottom: 0; width: var(--meter-w);
+  display: block; position: fixed; z-index: 40; top: 0; right: 0; bottom: 0;
+  width: var(--meter-w); padding-right: env(safe-area-inset-right, 0px); box-sizing: content-box;
   cursor: grab; touch-action: none; --road: 0px; background: #2c2f3a;
   box-shadow: -6px 0 18px rgba(0, 0, 0, 0.35);
 }
 /* red-and-white kerbs on both edges and a dashed centre line, all rolling under the car */
-.js .meter::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
+.js .meter::before, .js body::after {
+  content: ""; position: absolute; inset: 0 env(safe-area-inset-right, 0px) 0 0; pointer-events: none;
   background:
     linear-gradient(#e0483b 50%, #f4f2ec 50%) left 0 top var(--road) / 4px 28px repeat-y,
     linear-gradient(#e0483b 50%, #f4f2ec 50%) right 0 top var(--road) / 4px 28px repeat-y,
     linear-gradient(rgba(255, 255, 255, 0.85) 0 16px, transparent 16px) 50% var(--road) / 3px 34px repeat-y;
 }
+/* the same road painted down the page itself, under the fixed one. Phone browsers
+   won't draw fixed things under the notch, the search bar or the home bar, but they
+   do draw the page there, so the road still runs edge to edge. */
+.js body::after {
+  --road: 0px; left: auto; right: 0; width: var(--meter-w); z-index: 39;
+  border-right: env(safe-area-inset-right, 0px) solid #2c2f3a; background-color: #2c2f3a; box-sizing: content-box;
+}
 .meter img {
-  position: absolute; left: 50%; top: 0; width: calc(var(--meter-w) - 14px); height: auto;
+  position: absolute; left: calc(var(--meter-w) / 2); top: 0; width: calc(var(--meter-w) - 14px); height: auto;
   transform: translate3d(-50%, 8px, 0); transform-origin: 50% 50%;
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.5)); pointer-events: none;
 }
+/* the part of the screen nothing covers: the car stays inside it */
+.meter-band {
+  position: fixed; right: 0; width: 0; top: env(safe-area-inset-top, 0px); bottom: env(safe-area-inset-bottom, 0px);
+  visibility: hidden; pointer-events: none;
+}
 .meter:active { cursor: grabbing; }
-.coin-count { right: calc(var(--meter-w) + max(0.8rem, env(safe-area-inset-right, 0px))); }
+.coin-count { right: calc(var(--meter-w) + env(safe-area-inset-right, 0px) + 0.8rem); }
+/* the page keeps clear of the road, the notch and the home bar */
+.js body { padding-right: calc(var(--meter-w) + env(safe-area-inset-right, 0px)); }
+body { padding-left: env(safe-area-inset-left, 0px); }
+.site-head { padding-top: calc(1.1rem + env(safe-area-inset-top, 0px)); }
+.site-foot { padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px)); }
 @media (max-width: 860px) {
   :root { --meter-w: 26px; }
-  .js body { padding-right: var(--meter-w); }
 }
 
 /* racing-livery stripes under the big headings */
