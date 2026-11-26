@@ -29,52 +29,114 @@
 <main id="main">
 <section class="hero" aria-labelledby="hero-title">
   <svg class="skid" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="trail" x1="0" x2="1"><stop offset="0" stop-color="#ff7a1a" stop-opacity="0"/><stop offset=".35" stop-color="#ff7a1a"/><stop offset="1" stop-color="#ff4f9a"/></linearGradient>
+      <linearGradient id="trail2" x1="0" x2="1"><stop offset="0" stop-color="#38bdff" stop-opacity="0"/><stop offset=".4" stop-color="#38bdff"/><stop offset="1" stop-color="#8b5cff"/></linearGradient>
+    </defs>
     <path d="M-40 520 C 260 500, 420 380, 640 400 S 1020 560, 1480 300"/>
     <path d="M-40 565 C 260 545, 420 425, 640 445 S 1020 605, 1480 345"/>
   </svg>
   <canvas id="sparks" aria-hidden="true"></canvas>
+  <button type="button" class="secret-coin c1" data-coin="1" aria-label="A hidden coin"><img src="/media/token_coin.webp" alt="" width="44" height="44"></button>
   <div class="wrap">
     <div>
-      <img class="hero-mark" src="/media/mark.webp" alt="" width="615" height="358">
-      <h1 id="hero-title">Small studio. Fast games.</h1>
+      <button type="button" class="slam" aria-label="Slam the logo again"><img class="hero-mark" src="/media/mark.webp" alt="" width="615" height="358"></button>
+      <h1 id="hero-title">Small studio.<br>Fast games.</h1>
       <p class="lede">Meind Games makes mobile games with tight controls, fair rewards and runs you want to play again.</p>
-      <p>Our first game, Driftline Eternal, is out now on Google Play and coming soon to the App Store.</p>
-      <div class="actions"><a class="btn btn-go" href="https://play.google.com/store/apps/details?id=com.driftlineeternal.game">Get it on Google Play</a><span class="btn btn-soon" aria-disabled="true">App Store <small>coming soon</small></span></div>
+      <p>Our first game, Driftline Eternal, is a one-thumb drift racer.</p>
+      <a class="arcade hero-cta" href="#driftline">Meet Driftline Eternal</a>
     </div>
-    <div class="phone"><video data-loop autoplay muted loop playsinline preload="metadata" poster="/media/race-night-poster.jpg" aria-label="Driftline Eternal gameplay: drifting past rival cars through the city at night"><source src="/media/race-night.webm" type="video/webm"><source src="/media/race-night.mp4" type="video/mp4"></video></div>
+    <div class="showreel"><div class="phone"><video data-loop autoplay muted loop playsinline preload="metadata" poster="/media/clip-race-poster.jpg" aria-label="Driftline Eternal race mode: drifting side by side with a red rival through the city at night"><source src="/media/clip-race.webm" type="video/webm"><source src="/media/clip-race.mp4" type="video/mp4"></video></div><p class="reel-note">Slide to steer. That's the whole control.</p></div>
   </div>
 </section>
 <hr class="lane">
-<section class="game" aria-labelledby="game-title">
+<section class="game" id="driftline" aria-labelledby="game-title">
   <div class="wrap">
     <div class="game-head">
       <img class="icon" src="/media/driftline-icon.jpg" alt="" width="96" height="96">
       <h2 id="game-title"><img class="logo" src="/media/driftline-logo.webp" alt="Driftline Eternal" width="1200" height="140"></h2>
     </div>
-    <p class="about">Slide your thumb to throw your car sideways through an endless, ever-changing road. Weave past traffic, chain near misses into a combo, and see how far you can go.</p>
+    <p class="about">A one-thumb drift racer. Slide to throw your car sideways through an endless, ever-changing road, weave past traffic, chain near misses into a combo and see how far you can go.</p>
+    <div class="stores"><a class="store" href="https://play.google.com/store/apps/details?id=com.driftlineeternal.game"><img src="/media/badge-google-play.svg" alt="Get it on Google Play" width="182" height="54"></a><span class="store soon" aria-disabled="true"><img src="/media/badge-app-store.svg" alt="App Store" width="182" height="54"><small>Coming soon</small></span></div>
     <ul class="drive" aria-label="Driftline Eternal screenshots">
-  <li><img src="/media/shot-forest.jpg" alt="Drifting along a countryside road by day" loading="lazy" width="540" height="960"><span>Countryside</span></li>
-  <li><img src="/media/shot-sunset.jpg" alt="Drifting through a bend at sunset" loading="lazy" width="540" height="960"><span>Sunset</span></li>
-  <li><img src="/media/shot-city.jpg" alt="Drifting between skyscrapers at night" loading="lazy" width="540" height="960"><span>City at night</span></li>
-  <li><img src="/media/shot-race.jpg" alt="Racing rival cars through the city" loading="lazy" width="540" height="960"><span>Race mode</span></li>
+  <li><img src="/media/shot-drift-day.webp" alt="The orange Tensai Sprint drifting through a countryside bend at midday" loading="lazy" width="720" height="1280"><b>12:00, countryside</b><span>Every endless run starts at noon.</span></li>
+  <li><img src="/media/shot-sunset2.webp" alt="Drifting past a line of coins under a red sunset sky" loading="lazy" width="720" height="1280"><b>Sunset</b><span>Keep going and the sky turns.</span></li>
+  <li><img src="/media/shot-shield.webp" alt="The car drifting inside a glowing blue shield" loading="lazy" width="720" height="1280"><b>Shield up</b><span>Whatever you hit goes flying.</span></li>
+  <li><img src="/media/shot-race-boost.webp" alt="Drifting next to a red rival car over a green boost pad at night" loading="lazy" width="720" height="1280"><b>Race night</b><span>Five rivals and a boost pad.</span></li>
 </ul>
+  </div>
+</section>
+<hr class="lane">
+<section class="road" aria-labelledby="road-title">
+  <button type="button" class="secret-coin c2" data-coin="2" aria-label="A hidden coin"><img src="/media/token_coin.webp" alt="" width="44" height="44"></button>
+  <div class="wrap">
+    <h2 id="road-title">What's on the road</h2>
+    <p class="intro">Everything you'll drive into in endless mode, on purpose or not.</p>
+    <ul class="legend">
+      <li><img src="/media/token_coin.webp" alt="" width="72" height="72" loading="lazy"><div><h3>Coins</h3><p>They come in lines across the road. Spend them on cars and upgrades.</p></div></li><li><img src="/media/wheel_tires.webp" alt="" width="72" height="72" loading="lazy"><div><h3>Tires</h3><p>Rarer than coins. Spend them on extra wheel spins and more.</p></div></li><li><img src="/media/shield.svg" alt="" width="72" height="72" loading="lazy"><div><h3>Shield</h3><p>Smash straight through traffic. Whatever you hit tumbles off the road.</p></div></li><li><img src="/media/magnet.svg" alt="" width="72" height="72" loading="lazy"><div><h3>Magnet</h3><p>Pulls in every coin nearby, even the ones you were about to miss.</p></div></li><li><img src="/media/springs.svg" alt="" width="72" height="72" loading="lazy"><div><h3>Springs</h3><p>Flick your thumb up and the car jumps clean over trouble.</p></div></li><li><img src="/media/double-coins.svg" alt="" width="72" height="72" loading="lazy"><div><h3>2X Coins</h3><p>Every coin counts twice for a while.</p></div></li><li><img src="/media/double-score.svg" alt="" width="72" height="72" loading="lazy"><div><h3>2X Score</h3><p>Every point counts twice for a while.</p></div></li><li><img src="/media/oil.svg" alt="" width="72" height="72" loading="lazy"><div><h3>Oil spill</h3><p>Spins you out. One quest wants you to hit them anyway.</p></div></li><li><img src="/media/wheel_car.webp" alt="" width="72" height="72" loading="lazy"><div><h3>Traffic</h3><p>Scrape past for a near-miss bonus. Hit it and you crash.</p></div></li>
+    </ul>
+  </div>
+</section>
+<hr class="lane">
+<section class="tips" aria-labelledby="tips-title">
+  <button type="button" class="secret-coin c4" data-coin="4" aria-label="A hidden coin"><img src="/media/token_coin.webp" alt="" width="44" height="44"></button>
+  <div class="wrap">
+    <div class="tip-card" data-tips>
+      <script type="application/json" data-talk>["<blockquote class=\"talk-quote\"><p>Ask a child to draw a car, and certainly he will draw it red.</p><footer>Enzo Ferrari</footer></blockquote>", "<p class=\"talk-fact\">The first speeding ticket was handed out in England in 1896. Walter Arnold was doing 8 mph in a 2 mph zone.</p>", "<blockquote class=\"talk-quote\"><p>I live my life a quarter mile at a time.</p><footer>Dominic Toretto, The Fast and the Furious</footer></blockquote>", "<p class=\"talk-fact\">Drifting started on Japan&#x27;s mountain roads. Keiichi Tsuchiya, the Drift King, made it famous in the 1970s and &#x27;80s.</p>", "<blockquote class=\"talk-quote\"><p>Straight roads are for fast cars, turns are for fast drivers.</p><footer>Colin McRae</footer></blockquote>", "<p class=\"talk-fact\">Lamborghini built tractors before it built supercars.</p>", "<blockquote class=\"talk-quote\"><p>Roads? Where we&#x27;re going, we don&#x27;t need roads.</p><footer>Doc Brown, Back to the Future</footer></blockquote>", "<p class=\"talk-fact\">The world&#x27;s first traffic light went up in London in 1868. About a month later, it exploded.</p>", "<blockquote class=\"talk-quote\"><p>If everything seems under control, you&#x27;re just not going fast enough.</p><footer>Mario Andretti</footer></blockquote>", "<p class=\"talk-fact\">A Formula 1 car makes so much downforce that, in theory, it could drive upside down on a tunnel ceiling.</p>", "<blockquote class=\"talk-quote\"><p>If you ain&#x27;t first, you&#x27;re last.</p><footer>Ricky Bobby, Talladega Nights</footer></blockquote>", "<p class=\"talk-fact\">Windshield wipers were invented by Mary Anderson in 1903, after she watched a streetcar driver struggle with a snowy windshield.</p>", "<blockquote class=\"talk-quote\"><p>Aerodynamics are for people who can&#x27;t build engines.</p><footer>Enzo Ferrari</footer></blockquote>", "<p class=\"talk-fact\">Volvo invented the three-point seatbelt in 1959, then opened up the patent so every carmaker could use it.</p>", "<blockquote class=\"talk-quote\"><p>I am speed.</p><footer>Lightning McQueen, Cars</footer></blockquote>", "<p class=\"talk-fact\">The Toyota Corolla is the best-selling car of all time, with more than 50 million sold.</p>", "<blockquote class=\"talk-quote\"><p>Speed has never killed anyone. Suddenly becoming stationary, that&#x27;s what gets you.</p><footer>Jeremy Clarkson</footer></blockquote>", "<p class=\"talk-fact\">The Benz Patent-Motorwagen of 1886 is widely called the first real car. It had three wheels.</p>", "<blockquote class=\"talk-quote\"><p>I feel the need... the need for speed!</p><footer>Maverick and Goose, Top Gun</footer></blockquote>", "<p class=\"talk-fact\">In 2010 a traffic jam outside Beijing stretched about 100 km and lasted more than ten days.</p>"]</script>
+      <div class="tip-top">
+        <h2 id="tips-title">Car talk</h2>
+        <span class="tip-kind" data-tip-kind>Quote</span>
+      </div>
+      <div class="tip-body" data-tip aria-live="polite"><blockquote class="talk-quote"><p>Ask a child to draw a car, and certainly he will draw it red.</p><footer>Enzo Ferrari</footer></blockquote></div>
+      <div class="tip-foot">
+        <span class="tip-count" data-tip-count>1 / 20</span>
+        <button type="button" class="arcade" data-tip-next>Another one</button>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="lane">
+<section class="more" aria-labelledby="more-title">
+  <button type="button" class="secret-coin c3" data-coin="3" aria-label="A hidden coin"><img src="/media/token_coin.webp" alt="" width="44" height="44"></button>
+  <div class="wrap">
+    <h2 id="more-title">Plenty to come back for</h2>
     <ul class="features">
-  <li><h3>Endless mode</h3><p>Drift through countryside, city, sunset and snowy mountain passes, and chase a new high score.</p></li>
-  <li><h3>Race mode</h3><p>Beat rival drivers across 20 races, and upgrade your engine, chassis and coin bonus.</p></li>
-  <li><h3>A garage to fill</h3><p>Cars to unlock, power-ups like shields, magnets and springs, daily rewards, quests and a mystery wheel.</p></li>
-  <li><h3>One thumb</h3><p>Slide to steer, with a built-in tutorial. Playable in 11 languages.</p></li>
-</ul>
-    <p class="fine">Free to play, with optional in-app purchases and optional rewarded ads. <a href="/games">More about the game</a></p>
+      <li><img src="/media/icon_race_flags.webp" alt="" width="64" height="64" loading="lazy"><div><h3>Race mode</h3><p>20 races across the countryside, the sunset, the city and the snowy peaks, each against five rivals. Win one to unlock the next.</p></div></li><li><img src="/media/icon_menu_quests.webp" alt="" width="64" height="64" loading="lazy"><div><h3>Quests</h3><p>Three at a time, from drive 800 m in one run to bank a 600-point drift combo.</p></div></li><li><img src="/media/icon_menu_login.webp" alt="" width="64" height="64" loading="lazy"><div><h3>Daily rewards</h3><p>Mystery boxes, coins, token boxes, wheel spins, and on day seven a car.</p></div></li><li><img src="/media/icon_menu_spin.webp" alt="" width="64" height="64" loading="lazy"><div><h3>Mystery wheel</h3><p>Two free spins every day, with the odds for every prize shown in the game.</p></div></li><li><img src="/media/icon_engine.webp" alt="" width="64" height="64" loading="lazy"><div><h3>Upgrades</h3><p>Spend coins on your engine, chassis and coin bonus.</p></div></li><li><img src="/media/icon_trophy.webp" alt="" width="64" height="64" loading="lazy"><div><h3>Weekly ranking</h3><p>Pick a username and see how far up the weekly leaderboard you can get.</p></div></li>
+    </ul>
+    <p class="fine">Free to play, with optional in-app purchases and optional rewarded ads. Prize odds for every spin and box are shown in the game.</p>
+  </div>
+</section>
+<section class="get" aria-labelledby="get-title">
+  <div class="wrap">
+    <img class="icon" src="/media/driftline-icon.jpg" alt="" width="96" height="96" loading="lazy">
+    <div>
+      <h2 id="get-title">Get Driftline Eternal</h2>
+      <p>Free on Google Play. Coming soon to the App Store.</p>
+    </div>
+    <div class="stores"><a class="store" href="https://play.google.com/store/apps/details?id=com.driftlineeternal.game"><img src="/media/badge-google-play.svg" alt="Get it on Google Play" width="182" height="54"></a><span class="store soon" aria-disabled="true"><img src="/media/badge-app-store.svg" alt="App Store" width="182" height="54"><small>Coming soon</small></span></div>
   </div>
 </section>
 <hr class="lane">
 <section class="studio" aria-labelledby="studio-title">
   <div class="wrap">
-    <img class="wordmark" src="/media/wordmark.webp" alt="" width="727" height="172">
-    <div>
-      <h2 id="studio-title">About the studio</h2>
-      <p>Meind Games LLC is a small independent studio. We build every game ourselves, from the driving feel to the last menu, and we answer every email.</p>
-      <p>Need help with a game? Visit <a href="/support">Support</a> or email <a href="mailto:delanomeindl@meindgames.com">delanomeindl@meindgames.com</a>.</p>
+    <div class="studio-intro">
+      <img class="wordmark" src="/media/wordmark.webp" alt="" width="727" height="172">
+      <div>
+        <h2 id="studio-title">About the studio</h2>
+        <p>Meind Games LLC is a small independent studio. We build every game ourselves, from the driving feel to the last menu, and we answer every email.</p>
+        <p>Need help with a game? Visit <a href="/support">Support</a> or email <a href="mailto:delanomeindl@meindgames.com">delanomeindl@meindgames.com</a>.</p>
+        <div class="socials"><span>Follow Meind Games</span><a class="social tiktok" href="https://www.tiktok.com/@meindgames" target="_blank" rel="noopener" aria-label="Meind Games on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.8a4.3 4.3 0 0 1-1-2.8h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.8 5.8 0 1 0 5 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.4-1.6z"/></svg></a><a class="social instagram" href="https://www.instagram.com/meindgames" target="_blank" rel="noopener" aria-label="Meind Games on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.3"/></svg></a><a class="social facebook" href="https://www.facebook.com/profile.php?id=61596355317557" target="_blank" rel="noopener" aria-label="Meind Games on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h2.5V4.6h-2.8C10.7 4.6 9.7 6.5 9.7 8.8V11H7.5v3.3h2.2V22h3.4v-7.7h2.7l.5-3.3h-3.2V9.3c0-.8.3-1.3.9-1.3z"/></svg></a></div>
+      </div>
+    </div>
+    <div class="founder" aria-labelledby="founder-title">
+      <figure class="founder-photo"><img src="/media/delano.webp" alt="Delano Meindl, founder of Meind Games, outdoors at sunset" width="1200" height="1500" loading="lazy"></figure>
+      <div class="founder-text">
+        <h2 id="founder-title">Hi, I'm Delano</h2>
+        <p class="lede">I founded Meind Games, and I built Driftline Eternal in Unity, from the drift physics and the endless road to the last menu.</p>
+        <p>I study computer science at UC Santa Cruz. I started Meind Games to make the mobile games I'd want to play myself: quick to pick up, fair with their rewards, and hard to put down.</p>
+        <p>Want to talk games, code or anything else? Find me on LinkedIn.</p>
+        <a class="social-btn linkedin" href="https://www.linkedin.com/in/delano-meindl-794580216" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.6" cy="5.6" r="2"/><rect x="3.8" y="9" width="3.6" height="11.2"/><path d="M10 9h3.4v1.6c.5-.9 1.7-1.9 3.6-1.9 3.4 0 4 2.2 4 5.1v6.4h-3.6v-5.7c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3v5.8H10z"/></svg><span>Delano Meindl on LinkedIn</span></a>
+      </div>
     </div>
   </div>
 </section>
@@ -82,10 +144,13 @@
 <hr class="lane">
 <footer class="site-foot">
   <div class="wrap">
-    <p>&copy; 2026 Meind Games LLC. Questions? <a href="mailto:delanomeindl@meindgames.com">delanomeindl@meindgames.com</a></p>
-    <nav aria-label="Footer"><a href="/games">Games</a><a href="/support">Support</a><a href="/privacy-policy">Privacy Policy</a></nav>
+    <p>&copy; 2026 Meind Games LLC. Questions? <a href="mailto:delanomeindl@meindgames.com">delanomeindl@meindgames.com</a><br><span class="joke">No cars were harmed in the making of this website. A few came out scorched.</span></p>
+    <nav aria-label="Footer"><a href="/games">Games</a><a href="/support">Support</a><a href="/privacy-policy">Privacy Policy</a><a href="https://www.tiktok.com/@meindgames" target="_blank" rel="noopener">TikTok</a><a href="https://www.instagram.com/meindgames" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/profile.php?id=61596355317557" target="_blank" rel="noopener">Facebook</a></nav>
+    <button type="button" class="secret-coin c5" data-coin="5" aria-label="A hidden coin"><img src="/media/token_coin.webp" alt="" width="44" height="44"></button>
   </div>
 </footer>
+<div class="meter" data-meter aria-hidden="true"><img src="/media/tensai-top.webp" alt="" width="96" height="217"></div>
+<div class="coin-count" data-coin-count hidden aria-live="polite"><img src="/media/token_coin.webp" alt="" width="28" height="28"><span data-coin-text></span></div>
 <script src="/js/site.js" defer></script>
 </body>
 </html>
