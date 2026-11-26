@@ -46,6 +46,17 @@
   if (meter) {
     var car = meter.querySelector("img");
     var shown = 0, road = 0, lean = 0, facing = 0, faceTo = 0, lastY = window.scrollY, mraf = 0;
+    // the stretch of road the car can use: below the notch, above the search bar and home bar
+    var band = document.createElement("i");
+    band.className = "meter-band";
+    meter.appendChild(band);
+    function lane() {
+      var b = band.getBoundingClientRect(), m = meter.getBoundingClientRect();
+      var top = Math.max(b.top, m.top), bottom = Math.min(b.bottom, m.bottom, window.innerHeight);
+      var vv = window.visualViewport;
+      if (vv && Math.abs(vv.scale - 1) < 0.01) bottom = Math.min(bottom, vv.offsetTop + vv.height);
+      return { top: top - m.top + 8, span: Math.max(0, bottom - top - car.offsetHeight - 16) };
+    }
     function goal() {
       var max = document.documentElement.scrollHeight - window.innerHeight;
       return max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
@@ -62,8 +73,8 @@
       lean += ((reduced ? 0 : Math.max(-9, Math.min(9, speed * 900))) - lean) * 0.12;
       facing += (faceTo - facing) * (reduced ? 1 : 0.14);
       road += speed * 2600;                                 // the road rolls at the car's pace
-      var travel = meter.clientHeight - car.offsetHeight - 16;
-      car.style.transform = "translate3d(-50%," + (8 + shown * travel).toFixed(1) + "px,0) rotate(" + (facing + lean).toFixed(1) + "deg)";
+      var L = lane();
+      car.style.transform = "translate3d(-50%," + (L.top + shown * L.span).toFixed(1) + "px,0) rotate(" + (facing + lean).toFixed(1) + "deg)";
       meter.style.setProperty("--road", (-road).toFixed(1) + "px");
       var moving = Math.abs(target - shown) > 0.0004 || Math.abs(lean) > 0.05 || Math.abs(faceTo - facing) > 0.5;
       if (moving) mraf = requestAnimationFrame(frame);
@@ -71,11 +82,12 @@
     function kick() { if (!mraf) mraf = requestAnimationFrame(frame); }
     window.addEventListener("scroll", kick, { passive: true });
     window.addEventListener("resize", kick);
+    if (window.visualViewport) window.visualViewport.addEventListener("resize", kick);
     // grab the road (or the car) to drive the page yourself
     var dragging = false;
     function seek(e) {
-      var r = meter.getBoundingClientRect();
-      var p = Math.min(1, Math.max(0, (e.clientY - r.top - car.offsetHeight / 2) / (r.height - car.offsetHeight)));
+      var r = meter.getBoundingClientRect(), L = lane();
+      var p = L.span > 0 ? Math.min(1, Math.max(0, (e.clientY - r.top - L.top - car.offsetHeight / 2) / L.span)) : 0;
       window.scrollTo(0, p * (document.documentElement.scrollHeight - window.innerHeight));
     }
     meter.addEventListener("pointerdown", function (e) { dragging = true; meter.setPointerCapture(e.pointerId); seek(e); e.preventDefault(); });
