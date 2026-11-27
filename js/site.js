@@ -7,6 +7,15 @@
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var hero = document.querySelector(".hero");
 
+  // email links are written as data-u + data-d in the page so spam bots can't read
+  // the address; here they become normal clickable mailto links for people
+  document.querySelectorAll("a[data-u][data-d]").forEach(function (a) {
+    var email = a.getAttribute("data-u") + "@" + a.getAttribute("data-d");
+    var subject = a.getAttribute("data-s");
+    a.href = "mailto:" + email + (subject ? "?subject=" + encodeURIComponent(subject) : "");
+    a.textContent = email;
+  });
+
   // gameplay videos only play while on screen, and never for reduced motion
   var videos = document.querySelectorAll("video[data-loop]");
   videos.forEach(function (v) {
